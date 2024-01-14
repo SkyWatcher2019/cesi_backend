@@ -46,6 +46,7 @@ def edit_product(session: Session, id: int, product: ProductEdit) -> Product:
 def delete_product(session: Session, id: int) -> Product:
     db_product = get_product(session, id)
     session.delete(db_product)
+    session.commit()
     return db_product
 
 
