@@ -29,10 +29,12 @@ async def new(product: ProductCreate = Body(), db: Session = Depends(get_db)):
 
 
 @router.put('/{id}', response_model=Product)
-async def edit(id: int, product: ProductEdit, db: Session = Depends(get_db)):
+async def edit(id: int, product: ProductEdit = Body(), db: Session = Depends(get_db)):
     return crud.edit_product(db, id, product)
 
 
 @router.delete('/{id}', response_model=Product)
 async def delete(id: int, db: Session = Depends(get_db)):
-    return crud.delete_product(db, id)
+    db_product = crud.delete_product(db, id)
+    print(db_product)
+    return db_product
